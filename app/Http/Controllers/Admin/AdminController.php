@@ -142,6 +142,34 @@ class AdminController extends Controller
     }
 
 
+    public function deleteCategory($id)
+    {
+        // Assuming your model is named GalleryCategory
+        $category = GalleryCategory::findOrFail($id);
+        
+        // Optional: If you aren't using constrained()->cascadeOnDelete() in your migrations, 
+        // you should delete associated subcategories and items here first.
+        // $category->subCategories()->delete(); 
+
+        $category->delete();
+
+        return redirect()->back()->with('success', 'Main category deleted successfully.');
+    }
+
+    public function deleteSubCategory($id)
+    {
+        // Assuming your model is named GallerySubCategory
+        $subCategory = GallerySubCategory::findOrFail($id);
+        
+        // Optional: Delete associated gallery items
+        // $subCategory->items()->delete();
+
+        $subCategory->delete();
+
+        return redirect()->back()->with('success', 'Sub-category deleted successfully.');
+    }
+
+
 
     // 1. Show Blog Admin Page
     public function blog()

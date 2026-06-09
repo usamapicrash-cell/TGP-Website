@@ -7,7 +7,7 @@
         <script>
           document.write(new Date().getFullYear());
         </script>
-        , The Glass People ❤️ All Rights Reserved
+        . The Glass People. All Rights Reserved.
       </div>
     </div>
   </div>

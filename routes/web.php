@@ -70,6 +70,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::post('/gallery/subcategory', [AdminController::class, 'storeSubCategory'])->name('gallery.subcategory.store');
     Route::post('/gallery/item', [AdminController::class, 'storeGalleryItem'])->name('gallery.item.store');
     
+    // -> NEW: Add these delete routes
+    Route::delete('/gallery/category/{id}', [AdminController::class, 'deleteCategory'])->name('gallery.category.delete');
+    Route::delete('/gallery/subcategory/{id}', [AdminController::class, 'deleteSubCategory'])->name('gallery.subcategory.delete');
+    
     // Delete Route (Optional but recommended)
     Route::delete('/gallery/item/{id}', [AdminController::class, 'deleteGalleryItem'])->name('gallery.item.delete');
 
@@ -83,7 +87,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/review-edit', [AdminController::class, 'reviews'])->name('reviews');
     Route::post('/reviews-update', [AdminController::class, 'updateReviewSetting'])->name('reviews.update');
 
-
+    Route::get('services/{id}/edit', [ServicesController::class, 'edit'])->name('admin.services.edit');
     Route::get('service-edit', [ServicesController::class, 'index'])->name('services.index');
     Route::post('services/settings-update', [ServicesController::class, 'updateSettings'])->name('services.settings.update');
     
@@ -104,6 +108,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
     Route::get('/terms-edit', [TermController::class, 'edit'])->name('terms.edit');
     Route::post('/terms-of-service', [TermController::class, 'update'])->name('terms.update');
+
+
+    Route::get('nav-foot-setting', [CustomController::class, 'index'])->name('nav.index');
+    Route::post('nav-foot-setting/update', [CustomController::class, 'update'])->name('nav.update');
+
 
 });
 

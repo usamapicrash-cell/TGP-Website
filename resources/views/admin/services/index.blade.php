@@ -124,7 +124,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <!-- <a href="{{ route('admin.services.edit', $s->id) }}" class="btn btn-sm btn-outline-primary">Edit</a> -->
+                                            <a href="{{ route('admin.services.edit', $s->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
                                             <a href="{{ route('admin.services.delete', $s->id) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this service?')">Delete</a>
                                         </div>
                                     </td>

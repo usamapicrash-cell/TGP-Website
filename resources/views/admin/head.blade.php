@@ -91,6 +91,13 @@
       </li>
 
       <li class="menu-item">
+        <a href="{{ url('/admin/nav-foot-setting') }}" class="menu-link">
+          <i class="menu-icon icon-base ri ri-pages-fill"></i>
+          <div data-i18n="Custom">Nav and Foot Setting</div>
+        </a>
+      </li>
+
+      <li class="menu-item">
         <a href="{{ url('/admin/privacy-edit') }}" class="menu-link">
           <i class="menu-icon icon-base ri ri-police-badge-line"></i>
           <div data-i18n="Privacy">Privacy Policy</div>

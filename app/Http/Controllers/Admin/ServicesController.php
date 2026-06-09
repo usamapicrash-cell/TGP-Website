@@ -77,4 +77,29 @@ public function index() {
         return back()->with('success', 'Service deleted!');
     }
 
+    // Show Edit Form
+    public function edit($id) {
+        $service = Service::findOrFail($id);
+        return view('admin.services.edit', compact('service'));
+    }
+
+    // Handle Update
+    public function update(Request $request, $id) {
+        $service = Service::findOrFail($id);
+        $data = $request->all();
+
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($service->image && File::exists(public_path($service->image))) {
+                File::delete(public_path($service->image));
+            }
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('uploads/services'), $imageName);
+            $data['image'] = 'uploads/services/'.$imageName;
+        }
+
+        $service->update($data);
+        return redirect()->route('admin.services.index')->with('success', 'Service updated successfully!');
+    }
+
 }

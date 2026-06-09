@@ -9,6 +9,13 @@
                             </div>
                             <div class="top-bar-right">
                                 <ul class="top-bar-info">
+
+                                     <!-- Opening Hours Marquee -->
+                                       <li class="info-item text-white"
+                                            style="padding:5px 10px;border-right:1px solid #ddd;">
+                                            <i class="fa fa-clock-o mr-2"></i>
+                                            <span><strong>Mon - Fri:</strong> 8:00 AM - 5:00 PM</span>
+                                        </li>
                                     <li class="info-item">
                                         <a href="tel:{{ preg_replace('/[^0-9]/', '', $Pcontact->phone ?? '5036908481') }}" class="info-link text-white">
                                             <i class="info-icon fa fa-phone"></i>
@@ -49,31 +56,48 @@
                         <div class="header-right">
                             <div class="header__navigation menu-style-four d-none d-xl-block">
                                 <nav class="navigation-menu">
-                                    <ul>
-                                        <li>
-                                            <a href="{{ url('/home') }}"><span>Home</span></a>
+                                <ul>
+                                    @foreach($menuTree as $item)
+                                        @php
+                                            // Check if this item has children
+                                            $hasChildren = isset($item->children) && count($item->children) > 0;
+                                            
+                                            // Specific class for 'Contact Us' if you want that button style
+                                            $isContact = (strtolower($item->title) == 'contact us');
+                                        @endphp
+
+                                        <li class="{{ $hasChildren ? 'has-children has-children--multilevel-submenu' : '' }} {{ $isContact ? 'ht-btn text-uppercase' : '' }}" 
+                                            style="{{ $isContact ? 'margin: 0px 25px;' : '' }}">
+                                            
+                                            <a href="{{ url($item->url) }}"><span>{{ $item->title }}</span></a>
+
+                                            @if($hasChildren)
+                                                <ul class="submenu">
+                                                    @foreach($item->children as $child)
+                                                        @php 
+                                                            $hasGrandChildren = isset($child->children) && count($child->children) > 0; 
+                                                        @endphp
+                                                        
+                                                        <li class="{{ $hasGrandChildren ? 'has-children' : '' }}">
+                                                            <a href="{{ url($child->url) }}"><span>{{ $child->title }}</span></a>
+                                                            
+                                                            @if($hasGrandChildren)
+                                                                <ul class="submenu">
+                                                                    @foreach($child->children as $grandChild)
+                                                                        <li>
+                                                                            <a href="{{ url($grandChild->url) }}"><span>{{ $grandChild->title }}</span></a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
                                         </li>
-                                        <li>
-                                            <a href="{{ url('/about-us') }}"><span>About Us</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('/services') }}"><span>Services</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('/our-reviews') }}"><span>Our Reviews</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('/blogs') }}"><span>Blogs</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('/gallery') }}"><span>Gallery</span></a>
-                                        </li>
-                                        
-                                        <li class="ht-btn text-uppercase" style="margin: 0px 25px;">
-                                            <a href="{{ url('/contact-us') }}"><span>Contact us</span></a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                    @endforeach
+                                </ul>
+                            </nav>
                             </div>
 
                             <div class="mobile-navigation-icon white-md-icon d-block d-xl-none" id="mobile-menu-trigger">

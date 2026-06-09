@@ -11,54 +11,48 @@
                         {{ $Pcontact->footer_short_desc ?? 'The Glass People specialize in premium residential and commercial glass solutions. From custom mirrors to emergency glass repairs, we deliver excellence in every pane.' }}
                     </div>
                 </div>
+                    @if(isset($footers[1]))
+                    <div class="col-lg-2 col-md-4 col-sm-6 footer-widget footer-widget-mobile">
+                        <h6 class="footer-widget__title mb-20 text-white text-uppercase">Navigation</h6>
+                        <ul class="footer-widget__list">
+                            @foreach($footers[1] as $link)
+                                @if(!empty($link->title))
+                                    <li><a href="{{ url($link->url ?? '#') }}" class="hover-style-link text-white-50">{{ $link->title }}</a></li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
 
-                <div class="col-lg-2 col-md-4 col-sm-6 footer-widget footer-widget-mobile">
-                    <h6 class="footer-widget__title mb-20 text-white text-uppercase">Navigation</h6>
-                    <ul class="footer-widget__list">
-                        <li><a href="{{ url('/home') }}" class="hover-style-link text-white-50">Home</a></li>
-                        <li><a href="{{ url('/about-us') }}" class="hover-style-link text-white-50">About Us</a></li>
-                        <li><a href="{{ url('/services') }}" class="hover-style-link text-white-50">Our Services</a></li>
-                        <li><a href="{{ url('/gallery') }}" class="hover-style-link text-white-50">Gallery</a></li>
-                        <li><a href="{{ url('/contact-us') }}" class="hover-style-link text-white-50">Contact Us</a></li>
-                    </ul>
-                </div>
+                    @if(isset($footers[2]))
+                    <div class="col-lg-2 col-md-4 col-sm-6 footer-widget footer-widget-mobile">
+                        <h6 class="footer-widget__title mb-20 text-white text-uppercase">Support</h6>
+                        <ul class="footer-widget__list">
+                            @foreach($footers[2] as $link)
+                                @if(!empty($link->title))
+                                    <li><a href="{{ url($link->url ?? '#') }}" class="hover-style-link text-white-50">{{ $link->title }}</a></li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
 
-                <div class="col-lg-2 col-md-4 col-sm-6 footer-widget footer-widget-mobile">
-                    <h6 class="footer-widget__title mb-20 text-white text-uppercase">Support</h6>
-                    <ul class="footer-widget__list">
-                        <li><a href="{{ url('/privacy-policy') }}" class="hover-style-link text-white-50">Privacy Policy</a></li>
-                        <li><a href="{{ url('/terms-conditions') }}" class="hover-style-link text-white-50">Terms of Service</a></li>
-                        <li><a href="{{ url('/our-reviews') }}" class="hover-style-link text-white-50">Customer Reviews</a></li>
-                        <li><a href="{{ url('/blogs') }}" class="hover-style-link text-white-50">Latest News</a></li>
-                    </ul>
-                </div>
+                    @if(isset($footers[3]))
+                    <div class="col-lg-2 col-md-4 col-sm-6 footer-widget footer-widget-mobile">
+                        <h6 class="footer-widget__title mb-20 text-white text-uppercase">Services</h6>
+                        <ul class="footer-widget__list">
+                            @foreach($footers[3] as $link)
+                                @if(!empty($link->title))
+                                    <li><a href="{{ url($link->url ?? '#') }}" class="hover-style-link text-white-50">{{ $link->title }}</a></li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
 
-                <div class="col-lg-4 col-md-6 col-sm-6 footer-widget">
+                <div class="col-lg-2 col-md-4 col-sm-6 footer-widget">
                     <h6 class="footer-widget__title mb-20 text-white text-uppercase">Connect With Us</h6>
                     <p class="text-white-50 mb-20">{{ $Pcontact->social_follow_text ?? 'Follow us for our latest glass projects and updates.' }}</p>
-                    <ul class="list ht-social-networks solid-rounded-icon">
-                        @if($Pcontact->facebook)
-                        <li class="item">
-                            <a href="{{ $Pcontact->facebook }}" target="_blank" aria-label="Facebook" class="social-link">
-                                <i class="fab fa-facebook-f link-icon text-white"></i>
-                            </a>
-                        </li>
-                        @endif
-                        @if($Pcontact->instagram)
-                        <li class="item">
-                            <a href="{{ $Pcontact->instagram }}" target="_blank" aria-label="Instagram" class="social-link">
-                                <i class="fab fa-instagram link-icon text-white"></i>
-                            </a>
-                        </li>
-                        @endif
-                        @if($Pcontact->whatsapp)
-                        <li class="item">
-                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $Pcontact->whatsapp) }}" target="_blank" aria-label="WhatsApp" class="social-link">
-                                <i class="fab fa-whatsapp link-icon text-white"></i>
-                            </a>
-                        </li>
-                        @endif
-                    </ul>
                 </div>
             </div>
         </div>
@@ -67,11 +61,37 @@
     <div class="footer-copyright-area section-space--pb_30">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-12 text-center">
+                <div class="col-md-6 text-center text-md-start">
                     <p class="copyright-text text-white-50">
                         &copy; 2026 <strong>The Glass People</strong>. All Rights Reserved.
                     </p>
                 </div>
+
+                <div class="col-md-6 text-center text-md-end">
+                            <ul class="list ht-social-networks solid-rounded-icon">
+                                @if($Pcontact->facebook)
+                                <li class="item">
+                                    <a href="{{ $Pcontact->facebook }}" target="_blank" aria-label="Facebook" class="social-link">
+                                        <i class="fab fa-facebook-f link-icon text-white"></i>
+                                    </a>
+                                </li>
+                                @endif
+                                @if($Pcontact->instagram)
+                                <li class="item">
+                                    <a href="{{ $Pcontact->instagram }}" target="_blank" aria-label="Instagram" class="social-link">
+                                        <i class="fab fa-instagram link-icon text-white"></i>
+                                    </a>
+                                </li>
+                                @endif
+                                @if($Pcontact->whatsapp)
+                                <li class="item">
+                                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $Pcontact->whatsapp) }}" target="_blank" aria-label="WhatsApp" class="social-link">
+                                        <i class="fab fa-whatsapp link-icon text-white"></i>
+                                    </a>
+                                </li>
+                                @endif
+                            </ul>
+                        </div>
             </div>
         </div>
     </div>
@@ -161,29 +181,49 @@
             </div>
             <div class="mobile-menu-overlay__body">
                 <nav class="offcanvas-navigation">
-                   <ul>
-                                           <li class="">
-                                                <a href="{{ url('/home') }}"><span>Home</span></a>
+                    <ul>
+                        @foreach($menuTree as $item)
+                            @php
+                                $hasChildren = isset($item->children) && count($item->children) > 0;
+                            @endphp
+
+                            <li class="{{ $hasChildren ? 'has-children' : '' }}">
+                                @if($hasChildren)
+                                    <span class="menu-expand"><i></i></span>
+                                @endif
+                                
+                                <a href="{{ url($item->url) }}"><span>{{ $item->title }}</span></a>
+
+                                @if($hasChildren)
+                                    <ul class="sub-menu">
+                                        @foreach($item->children as $child)
+                                            @php 
+                                                $hasGrandChildren = isset($child->children) && count($child->children) > 0; 
+                                            @endphp
+                                            
+                                            <li class="{{ $hasGrandChildren ? 'has-children' : '' }}">
+                                                @if($hasGrandChildren)
+                                                    <span class="menu-expand"><i></i></span>
+                                                @endif
+                                                
+                                                <a href="{{ url($child->url) }}"><span>{{ $child->title }}</span></a>
+                                                
+                                                @if($hasGrandChildren)
+                                                    <ul class="sub-menu">
+                                                        @foreach($child->children as $grandChild)
+                                                            <li>
+                                                                <a href="{{ url($grandChild->url) }}"><span>{{ $grandChild->title }}</span></a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
                                             </li>
-                                             <li class="">
-                                                <a href="{{ url('/about-us') }}"><span>About Us</span></a>
-                                            </li>
-                                             <li class="">
-                                                <a href="{{ url('/services') }}"><span>Services</span></a>
-                                            </li>
-                                             <li class="">
-                                                <a href="{{ url('/our-reviews') }}"><span>Our Reviews</span></a>
-                                            </li>
-                                             <li class="">
-                                                <a href="{{ url('/blogs') }}"><span>Blogs</span></a>
-                                            </li>
-                                             <li class="">
-                                                <a href="{{ url('/gallery') }}"><span>Gallery</span></a>
-                                            </li>
-                                            <li class="">
-                                                <a href="{{ url('/contact-us') }}"><span>Contact us</span></a>
-                                            </li>
-                                        </ul>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </li>
+                        @endforeach
+                    </ul>
                 </nav>
             </div>
         </div>

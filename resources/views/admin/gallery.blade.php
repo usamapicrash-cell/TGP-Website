@@ -195,8 +195,15 @@
                     <ul class="list-group">
                         @foreach($subCategories as $sub)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ $sub->name }}
-                                <span class="badge bg-primary">Under: {{ $sub->category->name }}</span>
+                                <div>
+                                    {{ $sub->name }}
+                                    <span class="badge bg-primary ms-2">Under: {{ $sub->category->name }}</span>
+                                </div>
+                                <form action="{{ route('admin.gallery.subcategory.delete', $sub->id) }}" method="POST" class="m-0">
+                                    @csrf 
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this sub-category? All associated images may be affected.')">Delete</button>
+                                </form>
                             </li>
                         @endforeach
                     </ul>
@@ -219,7 +226,16 @@
                     <hr>
                     <ul class="list-group">
                         @foreach($categories as $cat)
-                            <li class="list-group-item">{{ $cat->name }} (Slug: {{ $cat->slug }})</li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    {{ $cat->name }} <small class="text-muted">(Slug: {{ $cat->slug }})</small>
+                                </div>
+                                <form action="{{ route('admin.gallery.category.delete', $cat->id) }}" method="POST" class="m-0">
+                                    @csrf 
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this main category? All sub-categories under it may be affected.')">Delete</button>
+                                </form>
+                            </li>
                         @endforeach
                     </ul>
                 </div>
