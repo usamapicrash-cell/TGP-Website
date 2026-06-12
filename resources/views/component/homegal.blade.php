@@ -9,6 +9,10 @@
                     <p class="text-muted container" style="max-width: 800px; margin: 0 auto;">
                         {{ $Psetting->project_text ?? 'From stunning residential transformations to sleek commercial installations...' }}
                     </p>
+
+                    <a href="{{ url('gallery') }}" class="ht-btn ht-btn-md mt-3 text-uppercase">
+                                Gallery
+                            </a>
                 </div>
             </div>
         </div>

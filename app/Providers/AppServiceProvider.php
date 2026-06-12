@@ -5,6 +5,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View; // Yeh zaroori hai
 use App\Models\Menu;
 use App\Models\Footer;
+use Illuminate\Support\Facades\Http;
 
 class AppServiceProvider extends ServiceProvider
 {

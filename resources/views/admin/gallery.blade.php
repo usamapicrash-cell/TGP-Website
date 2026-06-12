@@ -143,6 +143,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>Image</th>
                                     <th>Title</th>
                                     <th>Sub-Category</th>
@@ -152,6 +153,15 @@
                             <tbody>
                                 @foreach($items as $item)
                                 <tr>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input toggle-home"
+                                                   type="checkbox"
+                                                   data-id="{{ $item->id }}"
+                                                   {{ $item->show_on_home ? 'checked' : '' }}>
+                                            <label class="form-check-label">Home</label>
+                                        </div>
+                                    </td>
                                     <td><img src="{{ asset($item->image) }}" width="60" class="rounded"></td>
                                     <td>{{ $item->title }} <br><small class="text-muted">{{ $item->location }}</small></td>
                                     <td><span class="badge bg-info">{{ $item->subCategory->name }}</span></td>
@@ -245,4 +255,33 @@
 
     </div>
 </div>
+@push('scripts')
+
+<script>
+$(document).on('change', '.toggle-home', function () {
+
+    let id = $(this).data('id');
+    let status = $(this).is(':checked') ? 1 : 0;
+
+    $.ajax({
+        url: "{{ route('admin.gallery.toggle.home') }}",
+        type: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            id: id,
+            show_on_home: status
+        },
+        success: function (res) {
+            if (res.success) {
+                console.log('Updated successfully');
+            }
+        },
+        error: function () {
+            alert('Something went wrong');
+        }
+    });
+
+});
+</script>
+@endpush
 @endsection

@@ -12,9 +12,9 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="row row--35">
+                <div class="row">
                     @foreach($Pservices as $service)
-                    <div class="col-lg-4 col-md-6 mt-30">
+                    <div class="col-lg-3 col-md-6 mt-30">
                         <a href="{{ url('services/#' . $service->label) }}" class="box-large-image__wrap wow move-up animated">
                             <div class="box-large-image__box">
                                 <div class="box-large-image__midea">

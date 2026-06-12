@@ -56,19 +56,16 @@
         </div>
 @endif
 
-    @if($reviewSetting->breadform_status)
-        @include('component.breadform')
-    @endif
             
             <!--============ Resolutions Hero End ============-->
             
              
            @include('component.reviews')
        
-           @include('component.talk')
-
-            @include('component.quote')
-
+          
+    @if($reviewSetting->breadform_status)
+        @include('component.breadform')
+    @endif
 
 
 

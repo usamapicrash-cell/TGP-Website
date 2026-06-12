@@ -32,6 +32,20 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('contactQueries', 'contractorRfqs'));
     }
 
+    public function toggleHome(Request $request)
+    {
+        $item = GalleryItem::find($request->id);
+
+        if (!$item) {
+            return response()->json(['success' => false]);
+        }
+
+        $item->show_on_home = $request->show_on_home;
+        $item->save();
+
+        return response()->json(['success' => true]);
+    }
+
     public function gallery()
     {
         $setting = GallerySetting::first() ?? new GallerySetting();

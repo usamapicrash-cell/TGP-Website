@@ -2368,9 +2368,24 @@ textarea {
   .header__logo .light-logo {
     /*display: none;*/
   }
-  .homeabout-img-border,.homeabout-img2 {
+  .homeabout-img-border{
     display: none;
   }
+  .box-large-image__midea .images-midea .heading-wrap{
+    width: 90% !important;
+    padding: 10px;
+  }
+    .homeabout-img2 {
+        width: 300px !important;
+        bottom: 5px !important;
+        right: 10px !important;
+    }
+
+  .homeabout-img {
+        padding: 10px;
+        height: 500px !important;
+        margin-bottom:50px;
+    }
   .home-about-text{
     padding: 0px 10px !important;
   }
@@ -4165,6 +4180,7 @@ textarea {
 .footer-widget__title {
   margin-top: -3px;
   color: #333333;
+  font-size: 15px;
 }
 .footer-widget__list li {
   margin-bottom: 10px;
@@ -6569,10 +6585,10 @@ ul.footer-widget__horizontal-list li {
 }
 .box-large-image__midea .images-midea .heading-wrap {
   position: absolute;
-  top: 30%;
+  top: 20%;
   left: 0;
   right: 0;
-  width: 250px;
+  width: 200px;
   margin: 0 auto;
   z-index: 1;
   overflow: hidden;
@@ -14475,6 +14491,9 @@ color: #7AC9FF !important;
 
 .homeabout-img {
     border-radius: 0px 10px 10px 0px;
+    width: 660px !important;
+    height: 704px;
+    object-fit: cover;
 }
 
 .homeabout-img-border{
@@ -14489,7 +14508,8 @@ color: #7AC9FF !important;
 .homeabout-img2 {
     position: absolute;
     bottom: -5%;
-    width: 60%;
+    width: 376px;
+    height: 222px;
     right: -20%;
     background: white;
     padding: 10px;
@@ -15121,6 +15141,7 @@ font-size: 17px;
     width: 100%;
     object-fit: cover;
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    height: 300px;
 }
 
 /* Responsive Fix */

@@ -58,9 +58,16 @@
                     </div>
                 </div>
 
-                <div class="form-consent mt-2">
-                    <small class="text-muted" style="font-size: 10px;">
-                        By submitting, you agree to our <a href="{{ url('/terms-conditions') }}">Terms</a>.
+                <div class="form-consent mt-3">
+                    <small class="text-muted" style="font-size: 12px; line-height: 1.5;">
+                        By submitting this form, you agree to our 
+                        <a href="{{ url('/privacy-policy') }}" class="text-primary fw-semibold text-decoration-underline">
+                            Privacy Policy
+                        </a> 
+                        and 
+                        <a href="{{ url('/terms-conditions') }}" class="text-primary fw-semibold text-decoration-underline">
+                            Terms & Conditions
+                        </a>.
                     </small>
                 </div>
                 <div id="form-response-msg"></div>

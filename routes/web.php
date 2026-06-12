@@ -113,6 +113,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('nav-foot-setting', [CustomController::class, 'index'])->name('nav.index');
     Route::post('nav-foot-setting/update', [CustomController::class, 'update'])->name('nav.update');
 
+    Route::post('gallery/toggle-home', [AdminController::class, 'toggleHome'])
+    ->name('gallery.toggle.home');
+
 
 });
 

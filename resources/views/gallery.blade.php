@@ -5,6 +5,8 @@
 @section('meta_keywords', $gallerySetting->meta_keywords)
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <style>
     .gallery-card img { width: 100%; height: 250px; object-fit: cover; border-radius: 6px; }
     .messonry-button button.is-checked, .sub-group button.is-checked { background: #2f437e; color: white; border-color: #2f437e; }
@@ -107,7 +109,15 @@
                         <div class="col-lg-4 col-md-6 mb-30 res-grid-item {{ $cat->slug }} {{ $sub->slug }}">
                             <div class="gallery-card shadow-sm h-100 bg-white">
                                 <div class="gallery-image position-relative">
+                                    <a href="{{ asset($item->image) }}"
+                                       data-fancybox="gallery"
+                                       data-caption='
+                                       <div style="text-align:left">
+                                            <p><strong>{{ $item->title }}</strong></p>
+                                       </div>
+                                    '>
                                     <img src="{{ asset($item->image) }}" class="img-fluid" alt="{{ $item->title }}">
+                                    </a>
                                     <div class="gallery-badge">
                                         {{ $sub->name }}
                                     </div>
@@ -135,96 +145,132 @@
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var elem = document.querySelector('.mesonry-list');
-    var iso = new Isotope(elem, {
+document.addEventListener('DOMContentLoaded', function () {
+
+    const elem = document.querySelector('.mesonry-list');
+
+    if (!elem) return;
+
+    // Global isotope
+    window.iso = new Isotope(elem, {
         itemSelector: '.res-grid-item',
         layoutMode: 'fitRows'
     });
 
     // Main Filters
-    document.querySelector('.messonry-button').addEventListener('click', function(e) {
-        if (!e.target.matches('button')) return;
-        
-        let filterValue = e.target.getAttribute('data-filter');
-        let targetId = e.target.getAttribute('data-target');
+    const mainFilter = document.querySelector('.messonry-button');
 
-        // Update Active UI
-        this.querySelectorAll('button').forEach(b => b.classList.remove('is-checked'));
-        e.target.classList.add('is-checked');
+    if (mainFilter) {
+        mainFilter.addEventListener('click', function (e) {
 
-        // Toggle Sub Groups
-        document.querySelectorAll('.sub-group').forEach(g => g.style.display = 'none');
-        if(targetId) {
-            let group = document.getElementById(targetId);
-            if(group) group.style.display = 'block';
-        }
+            if (!e.target.matches('button')) return;
 
-        iso.arrange({ filter: filterValue });
-    });
+            let filterValue = e.target.dataset.filter;
+            let targetId = e.target.dataset.target;
+
+            this.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('is-checked');
+            });
+
+            e.target.classList.add('is-checked');
+
+            document.querySelectorAll('.sub-group').forEach(group => {
+                group.style.display = 'none';
+            });
+
+            if (targetId) {
+                let group = document.getElementById(targetId);
+                if (group) {
+                    group.style.display = 'block';
+                }
+            }
+
+            window.iso.arrange({
+                filter: filterValue
+            });
+        });
+    }
 
     // Sub Filters
     document.querySelectorAll('.sub-group').forEach(group => {
-        group.addEventListener('click', function(e) {
+
+        group.addEventListener('click', function (e) {
+
             if (!e.target.matches('button')) return;
-            this.querySelectorAll('button').forEach(b => b.classList.remove('is-checked'));
+
+            this.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('is-checked');
+            });
+
             e.target.classList.add('is-checked');
-            iso.arrange({ filter: e.target.getAttribute('data-filter') });
+
+            window.iso.arrange({
+                filter: e.target.dataset.filter
+            });
+
         });
+
     });
 
-    imagesLoaded(elem, () => iso.layout());
-});
-</script>
+    imagesLoaded(elem, function () {
+        window.iso.layout();
+    });
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-
+    // ==========================
+    // HASH FILTER SUPPORT
+    // ==========================
     let hash = window.location.hash.replace('#', '');
 
-    if(hash){
+    if (hash) {
 
-        // Scroll to gallery
         let section = document.querySelector('.feature-icon-wrapper');
-        if(section){
-            window.scrollTo({
-                top: section.offsetTop - 100,
-                behavior: 'smooth'
-            });
+
+        if (section) {
+            setTimeout(() => {
+                window.scrollTo({
+                    top: section.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }, 300);
         }
 
-        // STEP 1: Sub-category button find karo
-        let subBtn = document.querySelector(`.sub-group button[data-filter=".${hash}"]`);
+        let subBtn = document.querySelector(
+            `.sub-group button[data-filter=".${hash}"]`
+        );
 
-        if(subBtn){
+        if (subBtn) {
 
-            // STEP 2: uska parent group (div) lo
             let subGroup = subBtn.closest('.sub-group');
 
-            if(subGroup){
+            if (subGroup) {
 
-                // STEP 3: parent category ka slug nikalo
-                let parentSlug = subGroup.id.replace('-subs','');
+                let parentSlug = subGroup.id.replace('-subs', '');
 
-                // STEP 4: parent button activate karo
-                let parentBtn = document.querySelector(`.messonry-button button[data-filter=".${parentSlug}"]`);
+                let parentBtn = document.querySelector(
+                    `.messonry-button button[data-filter=".${parentSlug}"]`
+                );
 
-                if(parentBtn){
-                    parentBtn.click(); // parent active
+                if (parentBtn) {
+                    parentBtn.click();
                 }
 
-                // STEP 5: correct sub group show karo
-                document.querySelectorAll('.sub-group').forEach(g => g.style.display = 'none');
+                document.querySelectorAll('.sub-group').forEach(group => {
+                    group.style.display = 'none';
+                });
+
                 subGroup.style.display = 'block';
 
-                // STEP 6: sub button active karo
-                subGroup.querySelectorAll('button').forEach(b => b.classList.remove('is-checked'));
+                subGroup.querySelectorAll('button').forEach(btn => {
+                    btn.classList.remove('is-checked');
+                });
+
                 subBtn.classList.add('is-checked');
 
-                // STEP 7: isotope filter apply
-                if(typeof iso !== 'undefined'){
-                    iso.arrange({ filter: '.' + hash });
-                }
+                window.iso.arrange({
+                    filter: '.' + hash
+                });
+
+                window.iso.layout();
             }
         }
     }

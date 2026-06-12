@@ -12,7 +12,10 @@ class HomeController extends Controller
     {
         // Database se settings fetch karein
         $setting = HomeSetting::first();
-        $gallery = GalleryItem::latest()->take(10)->get();
+        $gallery = GalleryItem::where('show_on_home', 1)
+            ->latest()
+            ->take(10)
+            ->get();
         // Agar data nahi hai to error se bachne ke liye empty object pass karein
         return view('home', compact('setting', 'gallery'));
     }

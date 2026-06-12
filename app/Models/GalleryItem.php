@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class GalleryItem extends Model
 {
-    protected $fillable = ['gallery_sub_category_id', 'image', 'title', 'location'];
+    protected $fillable = ['gallery_sub_category_id', 'image', 'title', 'location', 'show_on_home'];
 
     public function subCategory()
     {

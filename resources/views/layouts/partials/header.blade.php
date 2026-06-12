@@ -33,7 +33,7 @@
     border-right: 1px solid #ddd;
     text-transform: uppercase;
     font-family: sans-serif;">
-                                            <a href="{{ url('/home') }}" style="color: #7ac9ff !important;"><span>Agent Portal</span></a>
+                                            <a href="https://app.theglasspeople.com/" target="_blank" style="color: #7ac9ff !important;"><span>Agent Portal</span></a>
                                     </li>
                                 </ul>
                             </div>

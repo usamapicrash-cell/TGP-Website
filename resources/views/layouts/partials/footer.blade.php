@@ -130,15 +130,10 @@
     <div class="inner">
         <a class="social-item toggle-btn" href="javascript:void(0)"><i class="fas fa-arrow-left"></i></a>
         
-        @if($Pcontact->whatsapp)
-        <a class="social-item whatsapp" target="_blank" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $Pcontact->whatsapp) }}">
-            <span class="label">WhatsApp</span><i class="fab fa-whatsapp"></i>
-        </a>
-        @endif
         
-        @if($Pcontact->instagram)
-        <a class="social-item instagram" target="_blank" href="{{ $Pcontact->instagram }}">
-            <span class="label">Instagram</span><i class="fab fa-instagram"></i>
+        @if($Pcontact->phone)
+        <a class="social-item phone" target="_blank" href="tel:{{ preg_replace('/[^0-9]/', '', $Pcontact->phone) }}">
+            <span class="label">Call Us</span><i class="fa fa-phone"></i>
         </a>
         @endif
         
@@ -148,11 +143,18 @@
         </a>
         @endif
 
-        @if($Pcontact->phone)
-        <a class="social-item phone" target="_blank" href="tel:{{ preg_replace('/[^0-9]/', '', $Pcontact->phone) }}">
-            <span class="label">Call Us</span><i class="fa fa-phone"></i>
+        @if($Pcontact->instagram)
+        <a class="social-item instagram" target="_blank" href="{{ $Pcontact->instagram }}">
+            <span class="label">Instagram</span><i class="fab fa-instagram"></i>
         </a>
         @endif
+
+        @if($Pcontact->whatsapp)
+        <a class="social-item whatsapp" target="_blank" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $Pcontact->whatsapp) }}">
+            <span class="label">WhatsApp</span><i class="fab fa-whatsapp"></i>
+        </a>
+        @endif
+        
     </div>
 </div>
 

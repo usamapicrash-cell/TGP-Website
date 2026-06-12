@@ -59,10 +59,6 @@
             </div>
         </div>
 @endif
-
-    @if($serviceSetting->breadform_status)
-        @include('component.breadform')
-    @endif
             <!--============ Resolutions Hero End ============-->
 
             <div class="feature-icon-wrapper section-space--ptb_100">
@@ -136,11 +132,9 @@
 
         </div>
     </div>
-
-            @include('component.talk')
-
-            @include('component.quote')
-
+@if($serviceSetting->breadform_status)
+        @include('component.breadform')
+@endif
 
 
 

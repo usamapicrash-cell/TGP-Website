@@ -56,9 +56,6 @@
         </div>
 @endif
 
-    @if($blogSetting->breadform_status)
-        @include('component.breadform')
-    @endif
 
             <!--============ Resolutions Hero End ============-->
             
@@ -127,9 +124,10 @@
             </div>
 
 
-            @include('component.talk')
-
-            @include('component.quote')
+           
+    @if($blogSetting->breadform_status)
+        @include('component.breadform')
+    @endif
 
 </div>
 @endsection
